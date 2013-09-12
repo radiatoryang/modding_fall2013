@@ -1,0 +1,6 @@
+*.csproj
+modding_week1/Library/
+modding_week1/Builds/
+modding_week1/Temp/
+*.sln
+modding_week2/Library/
