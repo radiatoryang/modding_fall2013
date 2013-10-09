@@ -4,7 +4,7 @@ using System.Collections.Generic; // YOU NEED THIS LINE TO USE LISTS
 
 public class FishGod : MonoBehaviour {
 
-    public Fish fishBlueprint; // assign in inspector
+    public Fish fishBlueprint, fishBlueprint2; // assign in inspector
     public int fishCount = 100;
 
     public List<Fish> fishList = new List<Fish>(); // you must initialize lists to use them
@@ -18,10 +18,21 @@ public class FishGod : MonoBehaviour {
             // first, let's generate a fish clone position
             Vector3 fishPosition = Random.insideUnitSphere * 100f;
 
-            // now let's spawn our fish clone, based off our blueprint
-            Fish newFish = Instantiate( fishBlueprint, fishPosition, Quaternion.identity ) as Fish;
+            float randomNumber = Random.Range( 0f, 10f );
+
+            Fish newFish;
+
+            if ( randomNumber > 5f ) {
+                // now let's spawn our fish clone, based off our blueprint
+                newFish = Instantiate( fishBlueprint, fishPosition, Quaternion.identity ) as Fish;
+            } else {
+                // now let's spawn our fish clone, based off our blueprint
+                newFish = Instantiate( fishBlueprint2, fishPosition, Quaternion.identity ) as Fish;
+            }
+
             // add the fish to our fish list, so we can do stuff with it later
-            fishList.Add( newFish );        
+            fishList.Add( newFish );
+            
 
             // increment our fishCounter; if we forget this step, it will be an INFINITE LOOP which is bad!
             currentFishCounter++;
@@ -46,6 +57,19 @@ public class FishGod : MonoBehaviour {
 
         }
 
+        // constructing initial ray struct
+        Ray ray = Camera.main.ScreenPointToRay( Input.mousePosition );
+        RaycastHit rayHit = new RaycastHit(); // reserving space in memory for this
+
+        // do NOT use "Collider.Raycast", which only casts against that collider
+        if ( Physics.Raycast( ray, out rayHit, 100000f ) ) {
+            Vector3 newDestination = rayHit.point;
+
+            // go through the entire list called "fishList", and for each fish, it sets destination
+            foreach ( Fish currentFish in fishList ) {
+                currentFish.destination = newDestination;
+            }
+        }
 
 	}
 }
