@@ -3,6 +3,9 @@ using System.Collections;
 
 public class NpcBot : MonoBehaviour {
 
+    public GUIText scoreText;
+    public TextMesh npcDialog;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -21,6 +24,9 @@ public class NpcBot : MonoBehaviour {
                 transform.Rotate( 0f, 90f, 0f );
             }
         }
+
+        scoreText.color = new Color( Random.value, Random.value, Random.value );
+        npcDialog.text = "Hey I love you";
 	}
 
     void FixedUpdate() {
