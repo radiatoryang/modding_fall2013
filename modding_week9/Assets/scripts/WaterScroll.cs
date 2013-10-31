@@ -8,6 +8,6 @@ public class WaterScroll : MonoBehaviour {
 
     void Update() {
         float offset = Time.time * scrollSpeed;
-        renderer.material.mainTextureOffset = new Vector2(-offset, offset ); // what if we plugged in a sine function?
+        renderer.material.mainTextureOffset = new Vector2(-offset, Mathf.Sin(offset * 2f) ); 
     }
 }
