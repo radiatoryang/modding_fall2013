@@ -14,8 +14,8 @@ public class PlatformerAnimation : MonoBehaviour {
 	void Update () {
 	    
         // if the player is moving
-        if ( Input.GetAxis( "Vertical" ) != 0f || Input.GetAxis( "Horizontal" ) != 0f ) {
-            animation["Walk"].speed = myRigidbody.velocity.magnitude;
+        if ( Input.GetAxis( "Vertical" ) != 0f ) {
+            animation["Walk"].speed = myRigidbody.velocity.magnitude * 0.1f;
             animation.CrossFade( "Walk" );
         } else {
             animation.CrossFade( "Idle" );
