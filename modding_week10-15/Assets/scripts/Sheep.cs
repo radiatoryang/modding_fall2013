@@ -16,12 +16,16 @@ public class Sheep : MonoBehaviour {
         // then you would GetComponent<>() instead
         // fameParticles = GetComponent<ParticleSystem>();
 
+        // stuff one number into another number; Unity automatically
+        // casts an integer ("fame") into emissionRate ("float")
         fameParticles.emissionRate = fame;
     }
 
     void Update() {
-        // if we are the current sheep, enable particles; otherwise, turn off
+        // we can use PlayerInput.currentSheep without fetching a reference to it
+        // because it is "public static", see PlayerInput.cs
         if ( PlayerInput.currentSheep == this ) {
+            // if we are the current sheep, enable particles; otherwise, turn off
             fameParticles.enableEmission = true;
         } else {
             fameParticles.enableEmission = false;
