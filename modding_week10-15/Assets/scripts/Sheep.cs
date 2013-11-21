@@ -19,7 +19,15 @@ public class Sheep : MonoBehaviour {
         // stuff one number into another number; Unity automatically
         // casts an integer ("fame") into emissionRate ("float")
         fameParticles.emissionRate = fame;
+
+		// 11-21-2013: added navigation stuff, call "RandomRoam" every 10 seconds
+		InvokeRepeating ( "RandomRoam", 1f, 10f );
     }
+
+	void RandomRoam() {
+
+		GetComponent<NavMeshAgent>().SetDestination ( Random.insideUnitSphere * 15f );
+	}
 
     void Update() {
         // we can use PlayerInput.currentSheep without fetching a reference to it
